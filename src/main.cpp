@@ -6,6 +6,8 @@
 void setup();
 void loop();
 
+byte buffer_arduino;
+//String buffer_arduino_String;
 void setup_arduino_way(){
   // Init Serial
   Serial1.setTX(12);
@@ -13,14 +15,15 @@ void setup_arduino_way(){
   // Start serial
   Serial1.begin(115200);
 }
-String buffer_arduino;
 void read_arduino_way(){
   if (Serial1.available()) {
-    buffer_arduino = Serial1.readString();
-    Serial1.print(buffer_arduino);
-    if (buffer_arduino == "0") {
-    }
-    if (buffer_arduino == "\r" || buffer_arduino == "\n") {
+    buffer_arduino = Serial1.read();
+//    buffer_arduino_String = Serial1.readString();
+    Serial1.write(buffer_arduino);
+//    Serial1.print(buffer_arduino_String);
+//    if (buffer_arduino == "0") {
+//    }
+    if (buffer_arduino == '\r' || buffer_arduino == '\n') {
       Serial1.print("\n\r");
     }
   }
